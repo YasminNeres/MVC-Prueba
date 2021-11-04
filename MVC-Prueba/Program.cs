@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MVC_Prueba;
 using MVC_Prueba.Data;
 using MvcMovie.Models;
 using System;
@@ -37,7 +38,7 @@ namespace MvcMovie
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<MVC_Prueba.Startup>();
+                    webBuilder.UseStartup<Startup>();
                 });
     }
 }
