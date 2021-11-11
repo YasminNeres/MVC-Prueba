@@ -52,19 +52,36 @@ namespace MVC_Prueba.Controllers
         }
 
         // GET: Movies/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id,bool booleano)
         {
-            if (id == null)
+
+            @ViewData["Mostrar"] = booleano;
+            var primeraPosicion = 0;
+
+            foreach (var item in _context.Movie)
             {
-                return NotFound();
+                if (primeraPosicion == 0)
+                {
+                    if (id == null)
+                    {
+                        id = item.Id;
+                    }
+                    @ViewData["PrimeraId"] = item.Id;
+                    primeraPosicion++;
+                }
+                @ViewData["UltimoId"] = item.Id;
             }
 
             var movie = await _context.Movie
                 .FirstOrDefaultAsync(m => m.Id == id);
+            var bbdd = _context.Movie.Count<Movie>();
+            var ultima = bbdd - 1;
+
             if (movie == null)
             {
                 return NotFound();
             }
+            
 
             return View(movie);
         }
